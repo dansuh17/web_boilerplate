@@ -1,21 +1,22 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var compression = require('compression');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
-var dotenv = require('dotenv');
-var React = require('react');
-var ReactDOM = require('react-dom/server');
-var Router = require('react-router');
-var Provider = require('react-redux').Provider;
-var mongoose = require('mongoose');
-var sass = require('node-sass-middleware');
-var webpack = require('webpack');
-var config = require('./webpack.config');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const dotenv = require('dotenv');
+const React = require('react');
+const ReactDOM = require('react-dom/server');
+const Router = require('react-router');
+const Provider = require('react-redux').Provider;
+const mongoose = require('mongoose');
+const sass = require('node-sass-middleware');
+const webpack = require('webpack');
+const config = require('./webpack.config');
 
 // Load environment variables from .env file
+// Now process.env has the environment variables
 dotenv.load();
 
 // ES6 Transpiler
@@ -23,30 +24,35 @@ require('babel-core/register');
 require('babel-polyfill');
 
 // Controllers
-var contactController = require('./controllers/contact');
+const contactController = require('./controllers/contact');
 
 // React and Server-Side Rendering
-var routes = require('./app/routes');
-var configureStore = require('./app/store/configureStore').default;
+const routes = require('./app/routes');
+const configureStore = require('./app/store/configureStore').default;
 
-var app = express();
+const app = express();
 
-var compiler = webpack(config);
+const compiler = webpack(config);
 
+// mongoDB configuration
+/**
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
 });
+*/
+
+// Other express app configuration
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('port', process.env.PORT || 3000);
-app.use(compression());
+app.use(compression());  // compress static contents - serves faster
 app.use(sass({ src: path.join(__dirname, 'public'), dest: path.join(__dirname, 'public') }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressValidator());
+app.use(expressValidator());  // validates req body : such as e-mail forms etc.
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
