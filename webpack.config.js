@@ -1,24 +1,24 @@
 const path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-var config = {
+const config = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './app/main'
+    './app/main',
   ],
   output: {
     path: path.join(__dirname, 'public', 'js'),
     filename: 'bundle.js',
-    publicPath: '/js'
+    publicPath: '/js',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
   ],
   module: {
     loaders: [
@@ -33,18 +33,18 @@ var config = {
                 {
                   transform: 'react-transform-hmr',
                   imports: ['react'],
-                  locals: ['module']
+                  locals: ['module'],
                 }, {
                   transform: 'react-transform-catch-errors',
-                  imports: ['react', 'redbox-react']
-                }
-              ]
-            }]
-          ]
-        }
-      }
-    ]
-  }
+                  imports: ['react', 'redbox-react'],
+                },
+              ],
+            }],
+          ],
+        },
+      },
+    ],
+  },
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -52,8 +52,8 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
-        warnings: false
-      }
+        warnings: false,
+      },
     })
   );
 }

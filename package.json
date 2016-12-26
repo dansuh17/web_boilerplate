@@ -11,6 +11,11 @@
     "test:client": "mocha test/client --recursive --compilers js:babel-register",
     "test:server": "mocha test/server --recursive --compilers js:babel-register"
   },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deNsuh/megaboilderplate-app"
+  },
   "dependencies": {
     "babel-core": "^6.7.2",
     "babel-loader": "^6.2.4",
@@ -51,6 +56,11 @@
     "babel-register": "^6.8.0",
     "chai": "^3.5.0",
     "enzyme": "^2.3.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "fetch-mock": "3.0.2",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^15.0.2",
