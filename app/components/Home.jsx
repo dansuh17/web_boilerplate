@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Messages from './Messages';
 
 class Home extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <Messages messages={this.props.messages}/>
+        <Messages messages={this.props.messages} />
         <div className="row">
           <div className="col-sm-4">
             <div className="panel">
@@ -47,10 +47,8 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    messages: state.messages
-  };
-};
+const mapStateToProps = (state) => (
+    { messages: state.messages }
+);
 
 export default connect(mapStateToProps)(Home);
